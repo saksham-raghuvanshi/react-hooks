@@ -32,6 +32,11 @@ function App() {
   function handleReset() {
     setCount(0);
   }
+
+  function handleDelete(id) {
+    setTasks(tasks.filter((task) => id !== task.id));
+  }
+
   return (
     <div className="App">
       <div className="box">
@@ -62,7 +67,9 @@ function App() {
               <span>
                 {task.id} - {task.name}
               </span>
-              <button>Delete</button>
+              <button onClick={() => handleDelete(task.id)} className="delete">
+                Delete
+              </button>
             </li>
           ))}
 
