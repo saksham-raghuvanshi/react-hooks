@@ -1,0 +1,27 @@
+{
+    "products":[{
+        "id":1001,
+        "name":"Basic to advance in React",
+        "price":29,
+        "in_stock":true
+    },
+    {
+        "id":1002,
+        "name":"React Hooks",
+        "price":10,
+        "in_stock":true
+    },
+    {
+        "id":1003,
+        "name":"Rest API",
+        "price":39,
+        "in_stock":true
+    },
+    {
+        "id":1004,
+        "name":"Create Website",
+        "price":15,
+        "in_stock":true
+    }]
+    
+}
