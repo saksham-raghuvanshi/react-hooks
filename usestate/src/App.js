@@ -10,6 +10,7 @@ function App() {
   ]);
 
   const [taskValue, settaskValue] = useState("");
+  const [progress, SetProgress] = useState("");
 
   function handleAdd() {
     setCount(count + 1);
@@ -39,8 +40,25 @@ function App() {
   }
 
   const handleChange = (ev) => {
-    ev.preventDefault();
     settaskValue(ev.target.value);
+  };
+
+  const handleReset2 = () => {
+    settaskValue("");
+    SetProgress(false);
+  };
+
+  const handlesubmit = (ev) => {
+    ev.preventDefault();
+    const task = {
+      id: Math.floor(Math.random() * 10000),
+      name: taskValue,
+      complete: Boolean(progress),
+    };
+
+    setTasks([...tasks, task]);
+    console.log(task);
+    handleReset2();
   };
 
   return (
@@ -66,18 +84,33 @@ function App() {
 
       <div>
         <section className="addtask">
-          <form>
+          <form onSubmit={handlesubmit}>
             <label htmlFor="task">Task Name:</label>
             <input
               onChange={handleChange}
               id="task"
               type="text"
+              name="task"
               placeholder="Task name"
+              value={taskValue}
             />
-            <button value={taskValue} type="submit">
-              Add task
-            </button>
+            <select
+              onChange={(ev) => {
+                SetProgress(ev.target.value);
+              }}
+              value={progress}
+            >
+              <option value={true}>Complete</option>
+              <option value={false}>Pending</option>
+            </select>
+
+            <button type="submit">Add task</button>
+            <span onClick={handleReset2} className="reset">
+              Reset
+            </span>
           </form>
+
+          {/* Here is taskvalue rendering so they can print but with useref vakue will not render */}
           <p>{taskValue}</p>
         </section>
         <h1>Task List</h1>
