@@ -22,6 +22,12 @@
         "name":"Create Website",
         "price":15,
         "in_stock":true
+    },
+    {
+        "id":1004,
+        "name":"Python Course",
+        "price":15,
+        "in_stock":false
     }]
     
 }
