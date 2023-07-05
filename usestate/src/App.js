@@ -1,4 +1,3 @@
-import { flushSync } from "react-dom";
 import "./App.css";
 import { useState } from "react";
 
@@ -9,6 +8,8 @@ function App() {
     { id: 7825, name: "Edit React Lectures", completed: false },
     { id: 8391, name: "Watch Lectures", completed: false },
   ]);
+
+  const [taskValue, settaskValue] = useState("");
 
   function handleAdd() {
     setCount(count + 1);
@@ -37,12 +38,17 @@ function App() {
     setTasks(tasks.filter((task) => id !== task.id));
   }
 
+  const handleChange = (ev) => {
+    ev.preventDefault();
+    settaskValue(ev.target.value);
+  };
+
   return (
     <div className="App">
       <div className="box">
-        <p>{count}</p>
         {/* //onclick = {handleclick} it exciute when we click on button or anonymous function {() => count +1}
       // onclick = {handleclick} it excute on render also */}
+        <p>{count}</p>
 
         <button onClick={handleAdd} className="add">
           Add
@@ -59,13 +65,28 @@ function App() {
       </div>
 
       <div>
+        <section className="addtask">
+          <form>
+            <label htmlFor="task">Task Name:</label>
+            <input
+              onChange={handleChange}
+              id="task"
+              type="text"
+              placeholder="Task name"
+            />
+            <button value={taskValue} type="submit">
+              Add task
+            </button>
+          </form>
+          <p>{taskValue}</p>
+        </section>
         <h1>Task List</h1>
         <ul>
           {/* {tasks}  we cannot access directly we can access individual so we need to use map  */}
           {tasks.map((task) => (
             <li key={task.id}>
               <span>
-                {task.id} - {task.name}
+                {task.id}: {task.name}
               </span>
               <button onClick={() => handleDelete(task.id)} className="delete">
                 Delete
