@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -8,19 +8,17 @@ const ProductLists = () => {
 
   console.log(products);
 
-  useEffect(() => {
-    // console.log("Mounted");
-    // return console.log("UnMounted");
+  //render when call
 
-    fetch(url)
-      .then((Response) => Response.json())
-      .then((data) => setproducts(data));
+  const fetchproducts = useCallback(async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    setproducts(data);
   }, [url]);
 
-  //output call infinity time data from api
-  //   fetch("http://localhost:8000/products/")
-  //   .then((Response) => Response.json())
-  //   .then((data) => console.log(data));
+  useEffect(() => {
+    fetchproducts();
+  }, [fetchproducts]);
 
   return (
     <section>
